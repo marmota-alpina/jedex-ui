@@ -1,0 +1,5 @@
+/* src/app/components/header/header.component.css */
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,0 +1,47 @@
+<div class="container">
+  <h2>{{ isEditMode ? 'Edit Contract' : 'New Contract' }}</h2>
+  <form [formGroup]="contractForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Company ID</mat-label>
+      <mat-select formControlName="company_id">
+        <mat-option *ngFor="let company of companies" [value]="company.id">
+          {{ company.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Start Date</mat-label>
+      <input matInput formControlName="start_date" type="date" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>End Date</mat-label>
+      <input matInput formControlName="end_date" type="date" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Dimensional Factor</mat-label>
+      <input matInput formControlName="dimensional_factor" />
+    </mat-form-field>
+
+    <div formArrayName="ranges">
+      <div *ngFor="let range of ranges.controls; let i = index" [formGroupName]="i">
+        <h4>Range {{ i + 1 }}</h4>
+        <mat-form-field appearance="fill">
+          <mat-label>Start Postal Code</mat-label>
+          <input matInput formControlName="start_postal_code" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>End Postal Code</mat-label>
+          <input matInput formControlName="end_postal_code" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Delivery Rate per KG</mat-label>
+          <input matInput formControlName="delivery_rate_per_kg" />
+        </mat-form-field>
+        <button mat-button type="button" (click)="removeRange(i)">Remove Range</button>
+      </div>
+    </div>
+    <button mat-button type="button" (click)="addRange()">Add Range</button>
+    <button mat-raised-button color="primary" type="submit">Save</button>
+    <button mat-button type="button" (click)="router.navigate(['/contracts'])">Cancel</button>
+  </form>
+</div>

@@ -1,0 +1,15 @@
+<div class="container" *ngIf="contract">
+  <h2>Contract Details</h2>
+  <p><strong>Company ID:</strong> {{ contract.company_id }}</p>
+  <p><strong>Start Date:</strong> {{ contract.start_date }}</p>
+  <p><strong>End Date:</strong> {{ contract.end_date }}</p>
+  <p><strong>Dimensional Factor:</strong> {{ contract.dimensional_factor }}</p>
+  <div>
+    <h3>Ranges</h3>
+    <div *ngFor="let range of contract.ranges">
+      <p><strong>Start Postal Code:</strong> {{ range.start_postal_code }}</p>
+      <p><strong>End Postal Code:</strong> {{ range.end_postal_code }}</p>
+      <p><strong>Delivery Rate per KG:</strong> {{ range.delivery_rate_per_kg }}</p>
+    </div>
+  </div>
+</div>

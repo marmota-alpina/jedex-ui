@@ -1,0 +1,49 @@
+<div class="container">
+  <h2 *ngIf="isEditMode">Edit Company</h2>
+  <h2 *ngIf="!isEditMode">Add Company</h2>
+  <form [formGroup]="companyForm" (ngSubmit)="onSubmit()">
+    <div class="form-field-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Register Number</mat-label>
+        <input matInput formControlName="register_number" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+    </div>
+    <div class="form-field-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="address" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>City</mat-label>
+        <input matInput formControlName="city" />
+      </mat-form-field>
+    </div>
+
+    <div class="form-field-group">
+      <mat-form-field appearance="fill">
+        <mat-label>State</mat-label>
+        <input matInput formControlName="state" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Postal Code</mat-label>
+        <input matInput formControlName="postal_code" />
+      </mat-form-field>
+    </div>
+    <div class="form-field-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Phone</mat-label>
+        <input matInput formControlName="phone" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" />
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" type="submit" [disabled]="companyForm.invalid">Save</button>
+    <button mat-button type="button" (click)="router.navigate(['/companies'])">Cancel</button>
+  </form>
+</div>
