@@ -9,18 +9,27 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Start Date</mat-label>
-      <input matInput formControlName="start_date" type="date" />
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>End Date</mat-label>
-      <input matInput formControlName="end_date" type="date" />
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Dimensional Factor</mat-label>
-      <input matInput formControlName="dimensional_factor" />
-    </mat-form-field>
+
+    <div class="flex-container">
+      <mat-form-field appearance="fill" class="flex-item">
+        <mat-label>Start Date</mat-label>
+        <input matInput [matDatepicker]="startDatePicker" formControlName="start_date" />
+        <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #startDatePicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="flex-item">
+        <mat-label>End Date</mat-label>
+        <input matInput [matDatepicker]="endDatePicker" formControlName="end_date" />
+        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #endDatePicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="flex-item">
+        <mat-label>Dimensional Factor</mat-label>
+        <input matInput formControlName="dimensional_factor" />
+      </mat-form-field>
+    </div>
 
     <div formArrayName="ranges">
       <div *ngFor="let range of ranges.controls; let i = index" [formGroupName]="i">
@@ -40,6 +49,7 @@
         <button mat-button type="button" (click)="removeRange(i)">Remove Range</button>
       </div>
     </div>
+
     <button mat-button type="button" (click)="addRange()">Add Range</button>
     <button mat-raised-button color="primary" type="submit">Save</button>
     <button mat-button type="button" (click)="router.navigate(['/contracts'])">Cancel</button>

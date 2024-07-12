@@ -2,7 +2,7 @@
   <h2>Contracts</h2>
   <table mat-table *ngIf="contracts$ | async as contracts" [dataSource]="contracts" class="mat-elevation-z8">
     <ng-container matColumnDef="company_id">
-      <th mat-header-cell *matHeaderCellDef> Company ID </th>
+      <th mat-header-cell *matHeaderCellDef> Contract ID </th>
       <td mat-cell *matCellDef="let contract"> {{ contract.id }} </td>
     </ng-container>
 

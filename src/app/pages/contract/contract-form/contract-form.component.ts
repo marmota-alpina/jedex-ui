@@ -6,6 +6,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { ContractService } from "../../../services/contract.service";
 import { CompanyService } from "../../../services/company.service";
 import { Company } from "../../../models/company.model";
@@ -15,7 +17,16 @@ import { Company } from "../../../models/company.model";
   selector: 'app-contract-form',
   templateUrl: './contract-form.component.html',
   styleUrls: ['./contract-form.component.css'],
-  imports: [CommonModule, ReactiveFormsModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
 })
 export class ContractFormComponent implements OnInit {
   contractForm!: FormGroup;
@@ -43,12 +54,12 @@ export class ContractFormComponent implements OnInit {
     if (this.id) {
       this.isEditMode = true;
       this.contractService.getContract(this.id).subscribe((contract) => {
-        this.contractForm.patchValue({
+        const formattedContract = {
           ...contract,
-          start_date: this.formatDate(contract.start_date),
-          end_date: this.formatDate(contract.end_date),
-        }
-        );
+          start_date: new Date(contract.start_date),
+          end_date: new Date(contract.end_date),
+        };
+        this.contractForm.patchValue(formattedContract);
         this.setRanges(contract.ranges);
       });
     }
@@ -62,10 +73,6 @@ export class ContractFormComponent implements OnInit {
     return this.contractForm.get('ranges') as FormArray;
   }
 
-  formatDate(dateString: string): string {
-    const date = new Date(dateString);
-    return date.toISOString().split('T')[0];
-  }
   setRanges(ranges: any[]): void {
     const rangeFGs = ranges.map(range => this.fb.group(range));
     const rangeFormArray = this.fb.array(rangeFGs);

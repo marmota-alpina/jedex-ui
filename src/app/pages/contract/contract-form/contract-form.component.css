@@ -10,3 +10,13 @@ mat-form-field {
 button {
   margin-top: 10px;
 }
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.flex-item {
+  flex: 1 1 30%;
+  min-width: 200px;
+}
